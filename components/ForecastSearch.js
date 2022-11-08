@@ -1,51 +1,59 @@
-import React from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TextInput, SafeAreaView, Text, View } from "react-native";
 
 
-const ForecastSearch = ({
-  toggleSearch,
-  setToggleSearch,
-  city,
-  setCity,
-  fetchLatLongHandler,
-  fetchByPostalHandler,
-  setPostalCode,
-  postalCode,
-}) => {
 
 
+const ForecastSearch = () => {
+  const [isFocused, setIsFocused] = useState(false);
   return (
-    <View style={style.container}>
-      <View>
-        <Text>Search By City</Text>
-        <TextInput style={style.searchInput} placeholder="Entry City Name"></TextInput>
-      </View>
+    <View style={styles.container}>
+      <SafeAreaView>
+        <TextInput
+          style={[styles.input, isFocused && {
+            color: "#495057",
+            backgroundColor: "#fff",
+            borderColor: "#80bdff",
+            outline: 0,
+            boxSshadow: "0 0 0 0.2rem rgb(0 123 255 / 25%)",
+          }]}
+          onFocus={() => setIsFocused(true)}
+          placeholder="Enter City Name"
+          keyboardType="default"
+        />
+      </SafeAreaView>
     </View>
-  );
+  )
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    maxWidth: 700,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "auto"
   },
-  title: {
-    fontSize: 12,
-    color: "#000",
+  text: {
+    color: "white",
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "#000000c0"
   },
-  searchInput: {
-    height: "50px",
-    margin: "12px",
+  input: {
+    height: 45,
+    margin: 12,
+    padding: 15,
     backgroundColor: "white",
-    padding: "15px",
-    borderRadius: "10px",
-    width: "95%",
-    maxWidth: "700px",
-    outline: "none"
-  }
-})
+    borderRadius: 10,
+    outline: "none",
+    border:0
+  },
+  inputFocus: {
+    color: "#495057",
+    backgroundColor: "#fff4",
+    borderColor: "#80bdff",
+    outline: 0,
+    boxSshadow: "0 0 0 0.2rem rgb(0 123 255 / 25%)",
+  },
+});
 
 export default ForecastSearch;
+
