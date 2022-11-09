@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, SafeAreaView, Text, View } from "react-native";
+import { StyleSheet, TextInput, SafeAreaView, Button,Text, View } from "react-native";
 
 
 
 
-const ForecastSearch = () => {
+const ForecastSearch = ({fetchLatLongHandler,city,setCity}) => {
   const [isFocused, setIsFocused] = useState(false);
+  const handleSubmit = (e) => {
+    console.log("Clicked")
+    fetchLatLongHandler()
+  };
+
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -20,6 +26,15 @@ const ForecastSearch = () => {
           onFocus={() => setIsFocused(true)}
           placeholder="Enter City Name"
           keyboardType="default"
+          value={city}
+          onChangeText = {setCity}
+        />
+        <Button style={styles.buttons}
+          title="Search"
+          color="#841584"
+          accessibilityLabel="Search by City"
+          onPress={handleSubmit}
+        
         />
       </SafeAreaView>
     </View>
@@ -29,6 +44,7 @@ const ForecastSearch = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems:"center"
   },
   text: {
     color: "white",
@@ -44,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     outline: "none",
-    border:0
+    border: 0
   },
   inputFocus: {
     color: "#495057",
@@ -53,6 +69,11 @@ const styles = StyleSheet.create({
     outline: 0,
     boxSshadow: "0 0 0 0.2rem rgb(0 123 255 / 25%)",
   },
+  buttons:{
+    height: 45,
+    margin: 12,
+    padding: 15,
+  }
 });
 
 export default ForecastSearch;
